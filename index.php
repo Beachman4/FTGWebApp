@@ -7,10 +7,10 @@ if (isset($_SESSION['username'], $_SESSION['user_id'])) {
 include($_SERVER['DOCUMENT_ROOT']."/system/controller/ffgcontroller.php");
 
 $con = mysqli_connect($hostname, $dbuser, $dbpass, $db);
-$ffgcontroller = new ffgcontroller;
+$ftgcontroller = new ftgcontroller;
 //whitelist check
 /*
-if ($ffgcontroller->checkip() == false) {
+if ($ftgcontroller->checkip() == false) {
     header("Location:/noaccess.php");
 }
 */
@@ -18,7 +18,7 @@ if (isset($_POST['login'], $_POST['password'])) {
     //Sanitize strings
     $username = $con->real_escape_string($_POST['login']);
     $password = $con->real_escape_string($_POST['password']);
-    if ($ffgcontroller->loginhandler(strtolower($username), $password, $con)) {
+    if ($ftgcontroller->loginhandler(strtolower($username), $password, $con)) {
         header('Location: /home/index.php');
     }
 }
@@ -26,7 +26,7 @@ if (isset($_POST['login'], $_POST['password'])) {
 <html>
     <head>
         <link rel="shortcut icon" href="/favicon.ico" type="image/png">
-        <title>FFG Admin Panel</title>
+        <title>FTG Admin Panel</title>
         <link rel="stylesheet" href="/public/css/bootstrap.css" />
         <link rel="stylesheet" href="/public/css/bootstrap-theme.css" />
         <link rel="stylesheet" href="/public/css/admin_login.css" />

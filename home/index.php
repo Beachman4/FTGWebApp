@@ -1,8 +1,10 @@
 <?php
 session_start();
-if (!(isset($_SESSION['username'], $_SESSION['user_id']))) {
-    header('Location: /database_web/index.php');
-}
+include ($_SERVER['DOCUMENT_ROOT'].'/system/controller/ftgcontroller.php');
+//Check if user is logged in
+$ftgcontroller = new ftgcontroller;
+$ftgcontroller->checklogin();
+
 ?>
 <html>
     <head>

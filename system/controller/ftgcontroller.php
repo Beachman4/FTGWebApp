@@ -1,6 +1,6 @@
 <?php
 include ($_SERVER['DOCUMENT_ROOT']."/system/config.php");
-class ffgcontroller {
+class ftgcontroller {
     /*
     Check if IP is in the whitelist
     
@@ -73,6 +73,15 @@ class ffgcontroller {
     public function logout() {
         session_start();
         session_destroy();
+    }
+    //Check if logged in
+    public function checklogin() {
+        if (!(isset($_SESSION['username'], $_SESSION['user_id']))) {
+            header("Location:/index.php");
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
