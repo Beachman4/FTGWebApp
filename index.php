@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (isset($_SESSION['username'], $_SESSION['user_id'])) {
+    header("Location:/home/");
+}
 include($_SERVER['DOCUMENT_ROOT']."/system/controller/ffgcontroller.php");
 
 $con = mysqli_connect($hostname, $dbuser, $dbpass, $db);
@@ -20,6 +23,7 @@ if (isset($_POST['login'], $_POST['password'])) {
 ?>
 <html>
     <head>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/png">
         <title>FFG Admin Panel</title>
         <link rel="stylesheet" href="/public/css/bootstrap.css" />
         <link rel="stylesheet" href="/public/css/bootstrap-theme.css" />
@@ -29,7 +33,6 @@ if (isset($_POST['login'], $_POST['password'])) {
         <script src="/public/js/admin_login.js" type="text/javascript"></script>
     </head>
     <body>
-        <h1 class="CName"><?php echo CName ?></h1>
         <section class="main">
 			<form class="form-3" method="post" action="index.php">
 			    <p class="clearfix">
