@@ -13,10 +13,11 @@ class ffgcontroller {
         $hashedpass = md5($password);
         $stmt = $con->prepare("SELECT user_id, username, email, password, rank FROM members WHERE username=? AND access='1'");
         $stmt->bind_param('s', $username);
-        if ($stmt->execute()) {
-            $stmt->bind_result($user_id, $username, $email, $db_password, $rank);
-            $stmt->fetch();
-            if ($stmt->num_rows == 1) {
+        $stmt->execute();
+        $stmt->bind_result($user_id, $username, $email, $db_password, $rank);
+        $stmt->store_result();
+        if ($stmt->num_rows == 1) {
+            if ($stmt->fetch()) {
                 if ($db_password == $hashedpass) {
                     $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
                     $_SESSION['username'] = $username;
@@ -28,9 +29,9 @@ class ffgcontroller {
                     $con->query("INSERT INTO login_attempts(user_id, time) VALUES ('$user_id', '$now')");
                     return false;
                 }
-            } else {
-                echo "idk what happened";
             }
+        } else {
+            echo "idk what happened";
         }
     }
     public function checkLocked($user_id, $con) {
