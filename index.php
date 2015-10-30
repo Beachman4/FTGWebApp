@@ -30,6 +30,7 @@ if (isset($_POST['login'], $_POST['password'])) {
         <link rel="stylesheet" href="/public/css/bootstrap.css" />
         <link rel="stylesheet" href="/public/css/bootstrap-theme.css" />
         <link rel="stylesheet" href="/public/css/admin_login.css" />
+        <link rel="stylesheet" href="/public/css/form.css" />
         <script src="/public/js/jquery-2.1.4.min.js" type="text/javascript"></script>
         <script src="/public/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="/public/js/admin_login.js" type="text/javascript"></script>

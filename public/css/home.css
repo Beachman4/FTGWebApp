@@ -39,8 +39,8 @@ body {
 #links p {
     display:inline-block;
     position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+    top: 50%;
+    transform: translateY(-50%);
 }
 .status {
     position: fixed;
@@ -60,5 +60,10 @@ body {
 .addplayerbutton {
     position: fixed;
     top: 15%;
+    left: 20%;
+}
+.addplayer {
+    position: fixed;
+    top: 18%;
     left: 20%;
 }

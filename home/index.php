@@ -13,8 +13,10 @@ $ftgcontroller->checklogin();
         <link rel="stylesheet" href="/public/css/bootstrap.css" />
         <link rel="stylesheet" href="/public/css/bootstrap-theme.css" />
         <link rel="stylesheet" href="/public/css/home.css" />
+        <link rel="stylesheet" href="/public/css/form.css" />
         <script type="text/javascript" src="/public/js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/public/js/ftgfunction.js"></script>
     </head>
     <body>
         <div class="sidebar">
@@ -32,10 +34,16 @@ $ftgcontroller->checklogin();
         </div>
         <div class="mainbody">
             <span class="addplayerbutton">
-                <button class="btn btn-default" type="button">Add a Player</button>
+                <button id="addplayerbutton" class="btn btn-default" onClick="ftgfunctions.showaddplayerform();" type="button">Add a Player</button>
             </span>
             <div class="Addplayer">
-                
+                <form method="post" class="form-3" action="index.php">
+                    <input type="text" name="name" id="name" placeholder="Player Name">
+                    <input type="text" name="uid" id="uid" placeholder="Player UID">
+                    <p style="width: 100%;">
+                        <input type="submit" name="submit" value="Create Player Account" />
+                    </p>
+                </form>
             </div>
         </div>
     </body>
