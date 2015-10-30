@@ -11,28 +11,25 @@ class ffgcontroller {
     }
     public function loginhandler($username, $password, $con) {
         $hashedpass = md5($password);
-        $stmt = $con->prepare("SELECT * FROM members WHERE username=? AND access=1") or die(mysql_error);
-        $stmt->execute();
-        $stmt->bind_result($user_id, $username, $email, $db_password, $rank);
-        $stmt->fetch();
-        if ($stmt->num_rows == 1) {
-            if ($this->checkLocked($user_id, $con)) {
-                return false;
-                echo "Up";
-            } else {
+        $stmt = $con->prepare("SELECT user_id, username, email, password, rank FROM members WHERE username=? AND access='1'");
+        $stmt->bind_param('s', $username);
+        if ($stmt->execute()) {
+            $stmt->bind_result($user_id, $username, $email, $db_password, $rank);
+            $stmt->fetch();
+            if ($stmt->num_rows == 1) {
                 if ($db_password == $hashedpass) {
                     $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
                     $_SESSION['username'] = $username;
                     $user_id = preg_replace("/[^0-9]+/", "", $user_id);
                     $_SESSION['user_id'] = $user_id;
                     return true;
-                    echo "You";
                 } else {
                     $now = time();
                     $con->query("INSERT INTO login_attempts(user_id, time) VALUES ('$user_id', '$now')");
                     return false;
-                    echo "fucked";
                 }
+            } else {
+                echo "idk what happened";
             }
         }
     }
@@ -45,10 +42,9 @@ class ffgcontroller {
             $stmt->store_result();
             if ($stmt->num_rows > 5) {
                 return true;
-                echo "lol";
             } else {
                 return false;
-                echo "suck";
+                echo $stmt->num_rows;
             }
         }
     }

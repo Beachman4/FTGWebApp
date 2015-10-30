@@ -1,6 +1,8 @@
 <?php
+session_start();
 include($_SERVER['DOCUMENT_ROOT']."/system/controller/ffgcontroller.php");
 
+$con = mysqli_connect($hostname, $dbuser, $dbpass, $db);
 $ffgcontroller = new ffgcontroller();
 //whitelist check
 /*
@@ -8,13 +10,9 @@ if ($ffgcontroller->checkip() == false) {
     header("Location:/index.php");
 }
 */
-if (isset($_POST['username'], $_POST['password'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    if ($ffgcontroller->loginhandler($username, $password, $con) == true) {
-        header('Location: /database_web/home/index.php');
-    } else {
-        echo "fucked up";
+if (isset($_POST['login'], $_POST['password'])) {
+    if ($ffgcontroller->loginhandler($_POST['login'], $_POST['password'], $con) == true) {
+        header('Location: /home/index.php');
     }
 }
 ?>
