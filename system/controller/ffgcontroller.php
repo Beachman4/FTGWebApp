@@ -17,17 +17,21 @@ class ffgcontroller {
         $stmt->bind_result($user_id, $username, $email, $db_password, $rank);
         $stmt->store_result();
         if ($stmt->num_rows == 1) {
-            if ($stmt->fetch()) {
-                if ($db_password == $hashedpass) {
-                    $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
-                    $_SESSION['username'] = $username;
-                    $user_id = preg_replace("/[^0-9]+/", "", $user_id);
-                    $_SESSION['user_id'] = $user_id;
-                    return true;
-                } else {
-                    $now = time();
-                    $con->query("INSERT INTO login_attempts(user_id, time) VALUES ('$user_id', '$now')");
-                    return false;
+            if ($this->checkLocked($user_id, $con)) {
+                return false;
+            } else {
+                if ($stmt->fetch()) {
+                    if ($db_password == $hashedpass) {
+                        $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
+                        $_SESSION['username'] = $username;
+                        $user_id = preg_replace("/[^0-9]+/", "", $user_id);
+                        $_SESSION['user_id'] = $user_id;
+                        return true;
+                    } else {
+                        $now = time();
+                        $con->query("INSERT INTO login_attempts(user_id, time) VALUES ('$user_id', '$now')");
+                        return false;
+                    }
                 }
             }
         } else {
@@ -49,12 +53,9 @@ class ffgcontroller {
             }
         }
     }
-    public function login_check($con) {
-        if (isset($_SESSION['username'], $_SESSION['user_id'])) {
-            $user_id = $_SESSION['user_id'];
-            $username = $_SESSION['username'];
-            
-        }
+    public function logout() {
+        session_start();
+        session_destroy();
     }
 }
 

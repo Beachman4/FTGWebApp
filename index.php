@@ -2,8 +2,8 @@
 session_start();
 include($_SERVER['DOCUMENT_ROOT']."/system/controller/ffgcontroller.php");
 
-$con = mysqli_connect($hostname, $dbuser, $dbpass, $db) or die(mysql_error);
-$ffgcontroller = new ffgcontroller();
+$con = mysqli_connect($hostname, $dbuser, $dbpass, $db);
+$ffgcontroller = new ffgcontroller;
 //whitelist check
 /*
 if ($ffgcontroller->checkip() == false) {
@@ -11,7 +11,9 @@ if ($ffgcontroller->checkip() == false) {
 }
 */
 if (isset($_POST['login'], $_POST['password'])) {
-    if ($ffgcontroller->loginhandler(strtolower($_POST['login']), $_POST['password'], $con) == true) {
+    $username = $con->real_escape_string($_POST['login']);
+    $password = $con->real_escape_string($_POST['password']);
+    if ($ffgcontroller->loginhandler(strtolower($username), $password, $con)) {
         header('Location: /home/index.php');
     }
 }
