@@ -25,5 +25,16 @@ if (!(isset($_SESSION['username'], $_SESSION['user_id']))) {
                 </ul>
             </div>
         </div>
+        <div class="status">
+            <h1 style="text-align: center;">**TODO**  Add player status, new player stats</h1>
+        </div>
+        <div class="mainbody">
+            <span class="addplayerbutton">
+                <button class="btn btn-default" type="button">Add a Player</button>
+            </span>
+            <div class="Addplayer">
+                
+            </div>
+        </div>
     </body>
 </html>

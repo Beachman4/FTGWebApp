@@ -1,5 +1,6 @@
 <?php
 session_start();
+// if Logged in already, redirect to home page
 if (isset($_SESSION['username'], $_SESSION['user_id'])) {
     header("Location:/home/");
 }
@@ -10,10 +11,11 @@ $ffgcontroller = new ffgcontroller;
 //whitelist check
 /*
 if ($ffgcontroller->checkip() == false) {
-    header("Location:/index.php");
+    header("Location:/noaccess.php");
 }
 */
 if (isset($_POST['login'], $_POST['password'])) {
+    //Sanitize strings
     $username = $con->real_escape_string($_POST['login']);
     $password = $con->real_escape_string($_POST['password']);
     if ($ffgcontroller->loginhandler(strtolower($username), $password, $con)) {
