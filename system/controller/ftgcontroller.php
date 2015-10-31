@@ -1,5 +1,5 @@
 <?php
-include ($_SERVER['DOCUMENT_ROOT']."/system/config.php");
+include ($_SERVER['DOCUMENT_ROOT']."system/config.php");
 class ftgcontroller {
     /*
     Check if IP is in the whitelist
@@ -71,7 +71,6 @@ class ftgcontroller {
     }
     //Simple logout script, may put in seperate file depending on if I can call it on button click
     public function logout() {
-        session_start();
         session_destroy();
     }
     //Check if logged in

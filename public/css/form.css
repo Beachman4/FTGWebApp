@@ -3,13 +3,12 @@
     font-weight: 400;
     /* Size and position */
     width: 300px;
-    position: fixed;
-    /*margin: 60px auto 30px; */
+    position: relative;
+    /*
     top: 18.5%;
-    left: 15.3%;
+    left: 15.3%; */
     padding: 10px;
     overflow: hidden;
-    display: none;
 
     /* Styles */
     background: #111; 

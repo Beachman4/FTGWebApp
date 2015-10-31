@@ -1,10 +1,13 @@
 <?php
 session_start();
-include ($_SERVER['DOCUMENT_ROOT'].'/system/controller/ftgcontroller.php');
+include ($_SERVER['DOCUMENT_ROOT'].'system/controller/ftgcontroller.php');
 //Check if user is logged in
 $ftgcontroller = new ftgcontroller;
 $ftgcontroller->checklogin();
 
+if (isset($_GET['logout'])) {
+    $ftgcontroller->logout();
+}
 ?>
 <html>
     <head>
@@ -25,7 +28,7 @@ $ftgcontroller->checklogin();
                     <li class="active"><a href="#"><p>Home</p></a></li>
                     <li><a href="#"><p>Search</p></a></li>
                     <li><a href="#"><p>Settings</p></a></li>
-                    <li><a href="#"><p>Logout</p></a></li>
+                    <li><a href=<?php echo $_SERVER['PHP_SELF']."?logout=true"?>><p>Logout</p></a></li>
                 </ul>
             </div>
         </div>
@@ -34,10 +37,10 @@ $ftgcontroller->checklogin();
         </div>
         <div class="mainbody">
             <span class="addplayerbutton">
-                <button id="addplayerbutton" class="btn btn-default" onClick="ftgfunctions.showaddplayerform();" type="button">Add a Player</button>
+                <button id="addplayerbutton" class="btn btn-default" onClick="showaddplayer();" type="button">Add a Player</button>
             </span>
             <div class="Addplayer">
-                <form method="post" class="form-3" action="index.php">
+                <form method="post" class="form-3" action="index.php" style="position: fixed;top: 18.5%; left: 15.3%; display:none;">
                     <input type="text" name="name" id="name" placeholder="Player Name">
                     <input type="text" name="uid" id="uid" placeholder="Player UID">
                     <p style="width: 100%;">

@@ -4,7 +4,7 @@ session_start();
 if (isset($_SESSION['username'], $_SESSION['user_id'])) {
     header("Location:/home/");
 }
-include($_SERVER['DOCUMENT_ROOT']."/system/controller/ffgcontroller.php");
+include($_SERVER['DOCUMENT_ROOT']."system/controller/ftgcontroller.php");
 
 $con = mysqli_connect($hostname, $dbuser, $dbpass, $db);
 $ftgcontroller = new ftgcontroller;
@@ -37,7 +37,7 @@ if (isset($_POST['login'], $_POST['password'])) {
     </head>
     <body>
         <section class="main">
-			<form class="form-3" method="post" action="index.php">
+			<form class="form-3" method="post" action="index.php" style="margin: 60px auto 30px;">
 			    <p class="clearfix">
 			        <label for="login">Username</label>
 			        <input type="text" name="login" id="login" placeholder="Username">

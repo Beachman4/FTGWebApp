@@ -1,6 +1,3 @@
-var ftgfunctions = function() {
-    var showaddplayerform = function() {
-        $('.form-3').show();
-    }
+var showaddplayer = function() {
+    $('.form-3').toggle();
 }
-var ftgfunctions = new ftgfunctions();
